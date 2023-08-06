@@ -148,8 +148,8 @@ export default function Home() {
                 href={link.url}
                 className="block p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg transition text-white saturate-50 hover:saturate-100 hover:scale-105"
               >
-                <span className="link-container">
-                  <span className="link-icon">
+                <span className="flex items-center">
+                  <span className="mr-[-5px]">
                     {typeof link.icon === "string" &&
                     link.icon.startsWith("https") ? (
                       <Image
@@ -165,9 +165,8 @@ export default function Home() {
                       <FaDharmachakra size={32} />
                     )}
                   </span>
-                  {link.nama}
+                  <div className="w-full text-center mr-5">{link.nama}</div>
                 </span>
-                {/* {link.title} */}
               </a>
             </li>
           ))}
