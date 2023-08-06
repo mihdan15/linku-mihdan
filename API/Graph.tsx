@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BaseGraphUri, HasuraToken } from "../API/constant";
+import { BaseGraphUri, HasuraToken } from "../API/Constant";
 
 const httpLink = createHttpLink({
   uri: BaseGraphUri,
