@@ -178,14 +178,14 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="md:flex md:items-center">
+        <div className="md:flex items-center">
           <div className="md:w-1/3">
             <button
               onClick={handleTambah}
-              className="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-cyan-800 hover:bg-cyan-900 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="button"
             >
-              Send
+              Tambah
             </button>
           </div>
           <div className="md:w-2/3"></div>
@@ -221,7 +221,11 @@ export default function Home() {
                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {link.nama}
                 </td>
-                <td className="px-6 py-4">{link.url.slice(0, 100)} </td>
+                <td className="px-6 py-4">
+                  {link.nama.includes("titip")
+                    ? link.url
+                    : link.url.slice(0, 100)}
+                </td>
                 <td className="px-6 py-4">
                   {link.icon && link.icon.slice(0, 100)}
                 </td>
@@ -246,7 +250,9 @@ export default function Home() {
         </table>
       </div>
 
-      <Link href="/">Home</Link>
+      <div className="mt-5">
+        <Link href="/">Home</Link>
+      </div>
     </div>
   );
 }

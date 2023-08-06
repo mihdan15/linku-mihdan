@@ -51,7 +51,7 @@ export default function Home() {
         {/* Header */}
         <div className="header">
           {/* Avatar */}
-          <div className="relative mx-auto bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full w-80 h-80 mb-5 overflow-hidden ">
+          <div className="relative mx-auto bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full w-64 h-64 mb-5 overflow-hidden shadow-sm">
             <Link href="/admin">
               <Image
                 src={Avatar}
@@ -73,7 +73,7 @@ export default function Home() {
               href="https://www.twitter.com/mage_field"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4"
+              className="p-4 text-gray-300 hover:text-white "
             >
               <FaTwitter size={32} />
             </a>
@@ -81,7 +81,7 @@ export default function Home() {
               href="https://www.instagram.com/mihdan_advani"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4"
+              className="p-4 text-gray-300 hover:text-white "
             >
               <FaInstagram size={32} />
             </a>
@@ -89,7 +89,7 @@ export default function Home() {
               href="https://www.github.com/mihdan15"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4"
+              className="p-4 text-gray-300 hover:text-white "
             >
               <FaGithub size={32} />
             </a>
@@ -97,7 +97,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/mihdanadvani/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4"
+              className="p-4 text-gray-300 hover:text-white "
             >
               <FaLinkedin size={32} />
             </a>
@@ -105,7 +105,7 @@ export default function Home() {
               href="https://mihdanadvani.my.id/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4"
+              className="p-4 text-gray-300 hover:text-white "
             >
               <FaGlobe size={32} />
             </a>
@@ -146,7 +146,7 @@ export default function Home() {
               <a
                 target="_blank"
                 href={link.url}
-                className="block p-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 shadow-md transition text-white saturate-50 hover:saturate-100 hover:scale-105"
+                className="block p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg transition text-white saturate-50 hover:saturate-100 hover:scale-105"
               >
                 <span className="link-container">
                   <span className="link-icon">
@@ -157,11 +157,12 @@ export default function Home() {
                         alt="icon"
                         width={32}
                         height={32}
+                        className="rounded-lg"
                       />
                     ) : link.icon ? (
-                      <FaDharmachakra size={24} />
+                      <FaDharmachakra size={32} />
                     ) : (
-                      <FaDharmachakra size={24} />
+                      <FaDharmachakra size={32} />
                     )}
                   </span>
                   {link.nama}
