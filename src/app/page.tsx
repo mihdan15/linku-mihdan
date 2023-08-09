@@ -6,11 +6,10 @@ import {
   FaGithub,
   FaLinkedin,
   FaGlobe,
-  FaFacebook,
 } from "react-icons/fa"; // Import the icons
 import React, { useState } from "react";
 import Image from "next/image";
-import Avatar from "public/avatar.png";
+import Avatar from "public/avatar.webp";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 import Load from "@/components/load";
@@ -30,7 +29,6 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const { loading, error, data } = useQuery(GET_DATA);
   const filteredLinks = data?.Linku.filter((link: any) =>
-    // link.title.toLowerCase().includes(searchQuery.toLowerCase())
     link.nama.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -40,13 +38,11 @@ export default function Home() {
     setSearchQuery(event.target.value);
   };
 
-  console.log(data);
-
   if (loading) return <Load />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8 bg-svg">
+    <div className="backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="header">
@@ -135,8 +131,7 @@ export default function Home() {
               value={searchQuery}
               onChange={handleSearchInputChange}
               className="placeholder:italic text-slate-700 placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              placeholder="Search for anything..."
-              // className="p-2 border rounded-lg w-full focus:ring-blue-300 text-blue-500"
+              placeholder="Cari yang kamu butuhkan..."
             />{" "}
           </div>
         </div>
@@ -155,14 +150,14 @@ export default function Home() {
                       <Image
                         src={link.icon}
                         alt="icon"
-                        width={32}
-                        height={32}
+                        width={36}
+                        height={36}
                         className="rounded-lg"
                       />
                     ) : link.icon ? (
-                      <FaDharmachakra size={32} />
+                      <FaDharmachakra size={36} />
                     ) : (
-                      <FaDharmachakra size={32} />
+                      <FaDharmachakra size={36} />
                     )}
                   </span>
                   <div className="w-full text-center mr-5">{link.nama}</div>

@@ -10,6 +10,7 @@ export default function Home() {
   const [iconLink, setIconLink] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertColor, setAlertColor] = useState("");
 
   // Query Add Data
   const ADD_LINK_MUTATION = gql`
@@ -57,6 +58,7 @@ export default function Home() {
     onCompleted: () => {
       setAlertMessage("Berhasil Menambahkan Link Baru");
       setShowAlert(true);
+      setAlertColor("green");
       setTimeout(() => {
         setShowAlert(false);
       }, 4000);
@@ -65,9 +67,6 @@ export default function Home() {
       setUrlLink("");
       setIconLink("");
       refetch();
-      // if (tableRef.current) {
-      //   tableRef.current.scrollIntoView({ behavior: "smooth" });
-      // }
     },
     onError: (error) => {
       console.error("Error adding data:", error);
@@ -75,18 +74,15 @@ export default function Home() {
   });
 
   const handleTambah = async () => {
-    // if (
-    //   namaLink === "" ||
-    //   urlLink === "" ||
-    // ) {
-    //   setAlertMessage("tidak boleh ada yang kosong!");
-    //   setAlertColor("red");
-    //   setShowAlert(true);
-    //   setTimeout(() => {
-    //     setShowAlert(false);
-    //   }, 1000);
-    //   return;
-    // }
+    if (namaLink === "" || urlLink === "") {
+      setAlertMessage("Nama atau URL tidak boleh kosong!");
+      setShowAlert(true);
+      setAlertColor("red");
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+      return;
+    }
     try {
       await addData({
         variables: {
@@ -104,6 +100,8 @@ export default function Home() {
     onCompleted: () => {
       console.log("Data deleted successfully");
       setAlertMessage("Link Anda Berhasil Dihapus");
+      setAlertColor("green");
+
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
@@ -125,7 +123,7 @@ export default function Home() {
 
   return (
     <div className="backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8 bg-svg">
-      {showAlert && <Alertsccs message={alertMessage} />}
+      {showAlert && <Alertsccs message={alertMessage} color={alertColor} />}
       <form className="w-full max-w-lg mx-auto">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
@@ -143,6 +141,7 @@ export default function Home() {
               name="nama_link"
               value={namaLink}
               onChange={(e) => setNamaLink(e.target.value)}
+              required
             />
           </div>
           <div className="w-full px-3">
@@ -159,6 +158,7 @@ export default function Home() {
               name="url_link"
               value={urlLink}
               onChange={(e) => setUrlLink(e.target.value)}
+              required
             />
           </div>
           <div className="w-full px-3">

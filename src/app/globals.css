@@ -26,6 +26,4 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-/* .bg-svg {
-  background-image: url("/public/bg.svg"); /* Ganti 'nama_file.svg' dengan nama file SVG Anda
-} */
+/* globals.css */
