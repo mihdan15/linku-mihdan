@@ -6,11 +6,9 @@ interface Props {
 }
 
 const Alertsccs: React.FC<Props> = ({ message, color }) => {
+  const alertClasses = `flex items-center p-4 mb-4 text-sm text-${color}-800 border border-${color}-300 rounded-lg bg-${color}-50 dark:bg-gray-800 dark:text-${color}-400 dark:border-${color}-800`;
   return (
-    <div
-      className={`flex items-center p-4 mb-4 text-sm text-${color}-800 border border-${color}-300 rounded-lg bg-${color}-50 dark:bg-gray-800 dark:text-${color}-400 dark:border-${color}-800`}
-      role="alert"
-    >
+    <div className={alertClasses} role="alert">
       <svg
         className="flex-shrink-0 inline w-4 h-4 mr-3"
         aria-hidden="true"

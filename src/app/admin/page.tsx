@@ -11,6 +11,13 @@ export default function Home() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertColor, setAlertColor] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [editLink, setEditLink] = useState({
+    id: null,
+    nama: "",
+    url: "",
+    icon: "",
+  });
 
   // Query Add Data
   const ADD_LINK_MUTATION = gql`
@@ -40,6 +47,22 @@ export default function Home() {
         icon
         nama
         url
+      }
+    }
+  `;
+
+  const EDIT_DATA_MUTATION = gql`
+    mutation UpdateLinku(
+      $id: Int!
+      $nama_link: String!
+      $url_link: String!
+      $icon_link: String!
+    ) {
+      update_Linku(
+        where: { id: { _eq: $id } }
+        _set: { nama: $nama_link, url: $url_link, icon: $icon_link }
+      ) {
+        affected_rows
       }
     }
   `;
@@ -93,6 +116,52 @@ export default function Home() {
       });
     } catch (error) {
       console.error("Error adding data:", error);
+    }
+  };
+
+  const [editData] = useMutation(EDIT_DATA_MUTATION, {
+    onCompleted: () => {
+      setAlertMessage("Berhasil Mengedit Link");
+      setShowAlert(true);
+      setAlertColor("green");
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 4000);
+      setEditMode(false);
+      refetch();
+    },
+    onError: (error) => {
+      console.error("Error editing data:", error);
+    },
+  });
+
+  const handleEdit = (link: any) => {
+    setEditLink(link);
+    setNamaLink(link.nama);
+    setUrlLink(link.url);
+    setIconLink(link.icon || "");
+    setEditMode(true);
+  };
+
+  const handleSubmit = async () => {
+    if (editMode && editLink.id) {
+      try {
+        await editData({
+          variables: {
+            id: editLink.id,
+            nama_link: namaLink,
+            url_link: urlLink,
+            icon_link: iconLink,
+          },
+        });
+        setNamaLink("");
+        setUrlLink("");
+        setIconLink("");
+      } catch (error) {
+        console.error("Error editing data:", error);
+      }
+    } else {
+      handleTambah();
     }
   };
 
@@ -181,11 +250,15 @@ export default function Home() {
         <div className="md:flex items-center">
           <div className="md:w-1/3">
             <button
-              onClick={handleTambah}
-              className="shadow bg-cyan-800 hover:bg-cyan-900 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className={`shadow ${
+                editMode
+                  ? "bg-yellow-600 hover:bg-yellow-700"
+                  : "bg-cyan-800 hover:bg-cyan-900"
+              } focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded`}
               type="button"
+              onClick={handleSubmit}
             >
-              Tambah
+              {editMode ? "Edit" : "Tambah"}
             </button>
           </div>
           <div className="md:w-2/3"></div>
@@ -230,12 +303,13 @@ export default function Home() {
                   {link.icon && link.icon.slice(0, 100)}
                 </td>
                 <td className="px-6 py-4">
-                  {/* <a
+                  <a
                     href="#"
+                    onClick={() => handleEdit(link)}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
-                  </a> */}
+                  </a>
                   <a
                     href="#"
                     className="font-medium text-red-600 dark:text-red-500 hover:underline px-2"
