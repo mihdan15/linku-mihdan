@@ -75,7 +75,9 @@ export default function Home() {
           className="block p-2 border rounded shadow-sm w-full max-w-lg mx-auto"
         >
           {data?.Categories?.map((category: any) => (
-            <option value={category.id}>{category.title}</option>
+            <option key={category.id} value={category.id}>
+              {category.title}
+            </option>
           ))}
         </select>
         <input
@@ -105,40 +107,42 @@ export default function Home() {
         {loading && <p>Loading links...</p>}
         {error && <p>Error: {error.message}</p>}
         <ul>
-          {data?.Categories?.map((Category: any) =>
-            Category.Links.map((link: any) => (
-              <li
-                key={link.id}
-                className="mb-4 p-4 border rounded shadow-sm space-y-2"
-              >
-                <div>
-                  <strong>Name:</strong> {link.name}
+          {data?.Categories?.map((Category: any) => (
+            <li key={Category.id}>
+              {Category.Links.map((link: any) => (
+                <div
+                  key={link.id}
+                  className="mb-4 p-4 border rounded shadow-sm space-y-2"
+                >
+                  <div>
+                    <strong>Name:</strong> {link.name}
+                  </div>
+                  <div>
+                    <strong>URL:</strong>{" "}
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      {link.url}
+                    </a>
+                  </div>
+                  <div>
+                    <strong>Category:</strong> {Category.title}
+                  </div>
+                  <div className="mt-2 space-x-2">
+                    <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                      Edit
+                    </button>
+                    <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <strong>URL:</strong>{" "}
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {link.url}
-                  </a>
-                </div>
-                <div>
-                  <strong>Category:</strong> {Category.title}
-                </div>
-                <div className="mt-2 space-x-2">
-                  <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                    Edit
-                  </button>
-                  <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                    Delete
-                  </button>
-                </div>
-              </li>
-            ))
-          )}
+              ))}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
