@@ -51,7 +51,7 @@ export default function Aitools() {
 
   return (
     <div className="flex justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8">
-      <div className="w-7/12">
+      <div className="space-y-4 mx-auto px-4 sm:w-full md:w-4/5">
         <div className="mb-5 bg-gray-800 bg-opacity-40 rounded">
           <input
             type="text"
@@ -78,7 +78,9 @@ export default function Aitools() {
               }`}
               onClick={() => toggleCategory(category.id)}
             >
-              <h2 className="text-lg font-medium">{category.title}</h2>
+              <h2 className="text-lg font-medium text-center flex-grow">
+                {category.title}
+              </h2>
               <span>
                 {expandedCategories.includes(category.id) ? (
                   <FaAngleUp size={32} />
@@ -89,7 +91,7 @@ export default function Aitools() {
             </div>
 
             {expandedCategories.includes(category.id) && (
-              <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 mt-4">
                 {category.Links.map((link) => (
                   <div
                     key={link.id}
