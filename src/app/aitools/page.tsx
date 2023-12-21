@@ -50,7 +50,7 @@ export default function Aitools() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="flex justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8">
+    <div className="flex justify-center backdrop-filter backdrop-blur-sm star-bg min-h-screen p-8">
       <div className="space-y-4 mx-auto px-4 sm:w-full md:w-4/5">
         <div className="mb-5 bg-gray-800 bg-opacity-40 rounded">
           <input
@@ -64,7 +64,7 @@ export default function Aitools() {
         {filteredCategories?.map((category: CategoryType) => (
           <div
             key={category.id}
-            className={`p-4 my-2 rounded transition-colors duration-200 cursor-pointer ${
+            className={`p-4 my-2 rounded[18px] transition-colors duration-200 cursor-pointer ${
               expandedCategories.includes(category.id)
                 ? "bg-gray-800 bg-op"
                 : "bg-gray-800"
@@ -107,16 +107,5 @@ export default function Aitools() {
         ))}
       </div>
     </div>
-    // <div className="flex justify-center mt-10">
-    //   <div className="w-7/12">
-    //     {data?.Categories?.map((category: CategoryType) => (
-    //       <Dropdown
-    //         key={category.id}
-    //         title={category.title}
-    //         Links={category.Links}
-    //       />
-    //     ))}
-    //   </div>
-    // </div>
   );
 }

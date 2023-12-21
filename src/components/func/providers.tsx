@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
-import { GraphQlClient } from "../../API/Graph";
+import { GraphQlClient } from "../../../API/Graph";
 import { ThemeProvider } from "next-themes";
 
 export function Providers({ children }: { children: React.ReactNode }) {

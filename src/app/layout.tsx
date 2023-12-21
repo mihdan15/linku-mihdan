@@ -1,10 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Footer from "@/components/footer";
-import Providers from "@/components/providers";
+import Background from "@/components/func/bg-star";
+import Providers from "@/components/func/providers";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "900"] });
 
 export const metadata: Metadata = {
   title: "Mihdan Advani - Link",
@@ -22,8 +22,9 @@ export default function RootLayout({
     // </html>
     <html lang="en">
       <body className={poppins.className}>
+        <div className="star-bg"></div>
         <Providers>{children}</Providers>
-        <Footer />
+        <Background />
       </body>
     </html>
   );

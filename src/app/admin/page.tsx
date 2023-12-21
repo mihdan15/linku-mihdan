@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState, useRef } from "react";
-import Alertsccs from "@/components/alertsccs";
+import Alertsccs from "@/components/func/alertsccs";
 
 export default function Home() {
   const [namaLink, setNamaLink] = useState("");
@@ -191,7 +191,7 @@ export default function Home() {
   };
 
   return (
-    <div className="backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gradient-to-b from-sky-800 to-slate-900 min-h-screen p-8 bg-svg">
+    <div className="backdrop-filter backdrop-blur-sm bg-opacity-10 min-h-screen p-8">
       {showAlert && <Alertsccs message={alertMessage} color={alertColor} />}
       <form className="w-full max-w-lg mx-auto">
         <div className="flex flex-wrap -mx-3 mb-6">
